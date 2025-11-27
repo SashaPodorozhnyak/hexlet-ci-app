@@ -12,7 +12,15 @@ jobs:
       # checkout — клонирует репозиторий
       - uses: actions/checkout@v4
       # run – произвольная bash-команда
-      # ls -la выведет содержимое текущего репозитория
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm' # ускоряет повторные сборки
+      - run: npm ci
+      - run: npm test
       - run: make setup
       - run: make test
       - run: make lint
+      - name: Hexlet
+        uses: hexlet-components/hello-from-hexlet-action@release
